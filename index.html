@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MaCa — Manual de marca y arquitectura web</title>
+<meta name="description" content="Manifiesto, sistema visual, arquitectura del sitio y brief técnico para MaCa, arte simbólico y materia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#16120F;
+  --hueso:#EFE9E0;
+  --hueso-2:#F6F2EB;
+  --madera:#DBC2AA;
+  --arena:#DFBC9C;
+  --petroleo:#193A39;
+  --sabila:#3A7775;
+  --pizarra:#5C94AA;
+  --sepia:#6B5240;
+  --linea:rgba(22,18,15,.16);
+  --linea-2:rgba(22,18,15,.09);
+
+  --display:"Cormorant Garamond","EB Garamond",Georgia,serif;
+  --texto:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --rail:10px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--hueso);color:var(--tinta);
+  font-family:var(--texto);font-size:17px;line-height:1.62;font-weight:400;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit}
+::selection{background:var(--sabila);color:var(--hueso-2)}
+:focus-visible{outline:2px solid var(--tinta);outline-offset:3px}
+strong{font-weight:600}
+
+/* --- retícula --- */
+.hoja{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.seccion{
+  display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);
+  gap:clamp(24px,4vw,56px);
+  padding:clamp(48px,7vw,88px) 0;
+  border-top:1px solid var(--tinta);
+}
+.seccion > header{position:sticky;top:28px;align-self:start}
+.num{
+  font-size:var(--rail);letter-spacing:.22em;color:var(--sabila);font-weight:500;
+  display:block;margin-bottom:10px;
+}
+.rail-title{
+  font-family:var(--display);font-weight:400;font-size:26px;line-height:1.1;
+  letter-spacing:-.01em;
+}
+.rail-title em{font-style:italic;color:var(--sepia)}
+.cuerpo{min-width:0}
+
+/* --- tipografía --- */
+.eyebrow{font-size:var(--rail);letter-spacing:.24em;text-transform:uppercase;color:var(--sepia);font-weight:500}
+h2.titulo{
+  font-family:var(--display);font-weight:400;font-size:clamp(34px,4.6vw,52px);
+  line-height:1.02;letter-spacing:-.015em;max-width:20ch;margin:10px 0 26px;
+}
+h2.titulo em{font-style:italic}
+h3.sub{
+  font-family:var(--display);font-weight:500;font-size:clamp(22px,2.4vw,28px);
+  line-height:1.15;letter-spacing:-.01em;margin:clamp(30px,4vw,44px) 0 12px;
+}
+h3.sub:first-child{margin-top:0}
+p.cuerpo-txt{max-width:62ch;margin-bottom:16px}
+p.cuerpo-txt + p.cuerpo-txt{margin-top:0}
+.entrada{
+  font-family:var(--display);font-size:clamp(21px,2.6vw,28px);line-height:1.35;
+  font-weight:300;max-width:34ch;color:var(--petroleo);
+}
+.dato{font-size:13px;color:var(--sepia);letter-spacing:.01em}
+
+/* --- portada --- */
+.portada{padding:clamp(40px,6vw,80px) 0 clamp(40px,6vw,64px);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.portada h1{font-family:var(--display);font-weight:300;font-size:clamp(64px,11vw,132px);line-height:.88;letter-spacing:-.03em;margin:14px 0 18px}
+.portada .bajada{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.6vw,30px);line-height:1.25;color:var(--sepia);max-width:24ch}
+.portada .meta{margin-top:clamp(28px,4vw,44px);padding-top:16px;border-top:1px solid var(--linea);font-size:12.5px;color:var(--sepia);max-width:46ch}
+.sello{width:100%;max-width:340px;justify-self:end}
+.sello svg{display:block;width:100%;height:auto}
+
+/* --- bloques --- */
+.par{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.par + .par{margin-top:clamp(20px,3vw,32px)}
+
+.pilar{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;
+  padding:18px 0;border-bottom:1px solid var(--linea-2);
+}
+.pilar:first-child{border-top:1px solid var(--linea-2)}
+.pilar .n{font-family:var(--display);font-size:22px;color:var(--sabila);line-height:1.2;width:2.2em}
+.pilar h4{font-size:16px;font-weight:600;letter-spacing:.01em;margin-bottom:4px}
+.pilar p{font-size:14.5px;line-height:1.55;color:var(--sepia);max-width:56ch}
+
+.contraste{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,40px);padding-top:22px;border-top:1px solid var(--tinta)}
+.contraste h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.contraste ul li{font-size:14.5px;line-height:1.6;padding:6px 0 6px 18px;position:relative;color:var(--tinta)}
+.contraste ul li::before{content:"";position:absolute;left:0;top:.85em;width:7px;height:1px;background:var(--sabila)}
+.contraste .no li::before{background:var(--sepia);opacity:.5}
+
+.cita{
+  margin:clamp(28px,4vw,44px) 0;padding:clamp(20px,3vw,32px) 0 clamp(20px,3vw,32px) clamp(20px,3vw,36px);
+  border-left:1px solid var(--madera);
+  font-family:var(--display);font-style:italic;font-size:clamp(20px,2.6vw,27px);line-height:1.4;color:var(--petroleo);
+}
+.cita cite{display:block;margin-top:14px;font-family:var(--texto);font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sepia)}
+
+/* --- paleta --- */
+.paleta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);margin:8px 0 clamp(24px,3vw,32px)}
+.sw{background:var(--hueso);padding:0}
+.sw .chip{aspect-ratio:1.25/1;display:block;box-shadow:inset 0 0 0 1px rgba(22,18,15,.12)}
+.sw .txt{padding:10px 12px 14px}
+.sw b{display:block;font-size:13.5px;font-weight:600;letter-spacing:.01em}
+.sw code{display:block;font-family:var(--texto);font-size:11.5px;letter-spacing:.06em;color:var(--sepia);margin:2px 0 6px}
+.sw span{display:block;font-size:11.5px;line-height:1.45;color:var(--sepia)}
+
+.reglas{border-top:1px solid var(--linea-2)}
+.regla{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--linea-2);font-size:14px}
+.regla b{font-weight:600}
+.regla span{color:var(--sepia)}
+
+/* --- tipografía muestra --- */
+.muestra{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:center;padding:22px 0;border-top:1px solid var(--linea-2);border-bottom:1px solid var(--linea-2)}
+.muestra .aa{display:flex;align-items:baseline;gap:.26em;font-family:var(--display);font-size:clamp(72px,9vw,116px);line-height:.8;font-weight:300;letter-spacing:-.02em}
+.muestra .aa .i{font-style:italic;color:var(--sepia)}
+.muestra dl div{display:flex;gap:12px;justify-content:space-between;padding:6px 0;border-bottom:1px dotted var(--linea);font-size:13px}
+.muestra dt{color:var(--sepia)}
+.muestra dd{font-weight:500;text-align:right}
+
+.tabla{width:100%;border-collapse:collapse;margin:8px 0 8px;font-size:14px}
+.tabla th{text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sepia);font-weight:500;padding:8px 12px 8px 0;border-bottom:1px solid var(--tinta)}
+.tabla td{padding:10px 12px 10px 0;border-bottom:1px solid var(--linea-2);vertical-align:top}
+.tabla td:first-child{font-weight:500;white-space:nowrap}
+
+/* --- arquitectura / wireframes --- */
+.rutas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);margin-bottom:clamp(28px,4vw,40px)}
+.ruta{background:var(--hueso);padding:14px}
+.ruta b{display:block;font-size:13.5px;font-weight:600;margin-bottom:2px}
+.ruta code{font-family:var(--texto);font-size:11px;letter-spacing:.04em;color:var(--sabila)}
+.ruta p{font-size:11.5px;line-height:1.45;color:var(--sepia);margin-top:6px}
+
+.wire{border:1px solid var(--linea);background:var(--hueso-2);padding:clamp(14px,2vw,22px);margin:14px 0 10px}
+.wire .barra{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--linea);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sepia)}
+.wire .bloque{border:1px dashed var(--linea);padding:16px 14px;margin-top:10px;font-size:12px;line-height:1.5;color:var(--sepia);background:rgba(58,119,117,.045)}
+.wire .bloque b{display:block;font-size:13px;letter-spacing:.02em;text-transform:none;color:var(--tinta);margin-bottom:4px;font-weight:600}
+.wire .fila{display:grid;gap:10px;margin-top:10px}
+.wire .fila.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.wire .fila.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wire .fila.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.wire .bloque.alto{min-height:150px;display:flex;flex-direction:column;justify-content:flex-end}
+.wire .nota{font-size:11px;color:var(--sepia);letter-spacing:0;text-transform:none;margin-top:14px;padding-top:10px;border-top:1px solid var(--linea-2)}
+
+.pasos{counter-reset:p;margin:8px 0 0}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid var(--linea-2);font-size:14.5px}
+.pasos li::before{content:counter(p,decimal-leading-zero);font-family:var(--display);color:var(--sabila);font-size:15px}
+
+/* --- apéndice --- */
+.apendice{padding:clamp(40px,6vw,72px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--tinta);display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.apendice .cuerpo{font-size:14px}
+.apendice h3{font-family:var(--display);font-size:24px;font-weight:500;margin:26px 0 10px}
+.apendice h3:first-child{margin-top:0}
+.apendice ul li{padding:5px 0 5px 16px;position:relative;color:var(--sepia)}
+.apendice ul li::before{content:"—";position:absolute;left:0;color:var(--madera)}
+
+.pie{border-top:1px solid var(--tinta);padding:22px 0 40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.06em;color:var(--sepia)}
+
+/* --- responsive --- */
+@media (max-width:900px){
+  .seccion,.apendice{grid-template-columns:1fr}
+  .seccion > header{position:static}
+  .portada{grid-template-columns:1fr}
+  .sello{justify-self:start;max-width:240px}
+  .paleta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rutas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .par,.contraste{grid-template-columns:1fr}
+  .muestra{grid-template-columns:1fr;align-items:start}
+  .wire .fila.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .paleta,.rutas{grid-template-columns:1fr}
+  .wire .fila.c3,.wire .fila.c2{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .seccion{page-break-inside:avoid}
+  .portada{page-break-after:always}
+  .seccion > header{position:static}
+}
+</style>
+</head>
+<body>
+
+<div class="hoja">
+
+  <!-- ================= PORTADA ================= -->
+  <header class="portada">
+    <div>
+      <p class="eyebrow">Documento de marca · versión 1</p>
+      <h1>MaCa</h1>
+      <p class="bajada">Geometría que crece, materia que guarda el gesto.</p>
+      <p class="meta">
+        Manual de marca y arquitectura del sitio.<br>
+        Preparado sobre una revisión de archivos locales: 113 archivos de diseño,
+        1.585 imágenes, 152 videos y el cuaderno de poesía.<br>
+        Octubre de 2026.
+      </p>
+    </div>
+
+    <div class="sello" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none" stroke="#16120F" stroke-width="1">
+        <circle cx="200" cy="200" r="190" opacity=".55"/>
+        <circle cx="200" cy="200" r="168" stroke="#DFBC9C" stroke-width="2" opacity=".9"/>
+        <circle cx="200" cy="200" r="150" opacity=".3"/>
+        <g opacity=".55">
+          <line x1="390" y1="200" x2="374" y2="200"/><line x1="364.5" y1="295" x2="350.7" y2="287"/>
+          <line x1="295" y1="364.5" x2="287" y2="350.7"/><line x1="200" y1="390" x2="200" y2="374"/>
+          <line x1="105" y1="364.5" x2="113" y2="350.7"/><line x1="35.5" y1="295" x2="49.3" y2="287"/>
+          <line x1="10" y1="200" x2="26" y2="200"/><line x1="35.5" y1="105" x2="49.3" y2="113"/>
+          <line x1="105" y1="35.5" x2="113" y2="49.3"/><line x1="200" y1="10" x2="200" y2="26"/>
+          <line x1="295" y1="35.5" x2="287" y2="49.3"/><line x1="364.5" y1="105" x2="350.7" y2="113"/>
+        </g>
+        <g opacity=".45">
+          <circle cx="200" cy="200" r="55"/>
+          <circle cx="255" cy="200" r="55"/><circle cx="227.5" cy="247.6" r="55"/>
+          <circle cx="172.5" cy="247.6" r="55"/><circle cx="145" cy="200" r="55"/>
+          <circle cx="172.5" cy="152.4" r="55"/><circle cx="227.5" cy="152.4" r="55"/>
+        </g>
+        <circle cx="200" cy="200" r="3" fill="#16120F" stroke="none"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ================= 01 MANIFIESTO ================= -->
+  <section class="seccion" id="manifiesto">
+    <header>
+      <span class="num">01</span>
+      <h2 class="rail-title">Manifiesto y<br><em>posicionamiento</em></h2>
+    </header>
+
+    <div class="cuerpo">
+      <p class="entrada">
+        Trabajo con símbolos que existían antes que yo. No los copio: los traduzco a un trazo propio
+        y los quemo, los pinto o los bordo sobre materias que guardan el gesto.
+      </p>
+
+      <p class="cuerpo-txt" style="margin-top:26px">
+        Cada pieza es el mapa de un proceso interno —el mío o el de quien la encarga—. Por eso ninguna
+        se repite igual: el símbolo es la escala, no el producto. La obra vive en la pared de una casa,
+        en una prenda que se usa todos los días, en una tabla que se toca, en una piel.
+      </p>
+
+      <h3 class="sub">Cinco pilares</h3>
+
+      <div class="pilar">
+        <span class="n">01</span>
+        <div>
+          <h4>Geometría que crece</h4>
+          <p>La retícula sagrada —mandala, flor de la vida, metatrón— se organiza con lógica de planta:
+            tallo, hoja, pétalo. La estructura se percibe, pero nunca manda sobre el dibujo.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <span class="n">02</span>
+        <div>
+          <h4>La materia guarda el gesto</h4>
+          <p>Madera, muro, tela, piel. La técnica deja cicatriz: el quemado, el pincel, la aguja.
+            Ninguna pieza se ve “impresa” si no lo está de verdad.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <span class="n">03</span>
+        <div>
+          <h4>El símbolo se explica</h4>
+          <p>Unalome, loto, serpiente, colibrí, escarabajo maquech. Cada símbolo se elige por lo que
+            codifica y se documenta: origen, lectura propia y por qué aparece en esa pieza.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <span class="n">04</span>
+        <div>
+          <h4>Proceso en primera persona</h4>
+          <p>El texto y la voz grabada forman parte de la obra, no son contenido de marketing.
+            La bitácora es el otro lado de la pieza, no un blog.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <span class="n">05</span>
+        <div>
+          <h4>Una línea, todas las escalas</h4>
+          <p>El mismo trazo vive en un tatuaje de ocho centímetros, en un mural de seis metros y en
+            un estampado de veintidós. Cambia la escala, no la mano.</p>
+        </div>
+      </div>
+
+      <div class="contraste">
+        <div>
+          <h4>Lo que es</h4>
+          <ul>
+            <li>Obra simbólica con investigación detrás.</li>
+            <li>Oficio material: quemar, pintar, bordar, tatuar.</li>
+            <li>Piezas únicas y series cortas, hechas a mano.</li>
+            <li>Un mapa que acompaña un proceso real.</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h4>Lo que no es</h4>
+          <ul>
+            <li>Decoración “new age” comprada por catálogo.</li>
+            <li>Símbolos ancestrales usados como estampa vacía.</li>
+            <li>Arte por encargo que copia una referencia tal cual.</li>
+            <li>Una tienda de remeras con un dibujo arriba.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Posicionamiento</h3>
+      <p class="cuerpo-txt">
+        <strong>Para</strong> quien está atravesando un cambio y busca un objeto que lo acompañe,
+        <strong>MaCa</strong> hace arte simbólico trazado a mano sobre materia real,
+        <strong>porque</strong> un símbolo elegido y documentado sostiene más que un objeto decorativo.
+      </p>
+
+      <h3 class="sub">Para quién</h3>
+      <table class="tabla">
+        <tr><th>Perfil</th><th>Qué busca</th><th>Qué compra</th></tr>
+        <tr><td>Ritual personal</td><td>Un símbolo de pasaje para tatuarse o colgar</td><td>Diseño original, ficha del símbolo, sesión</td></tr>
+        <tr><td>Espacio propio</td><td>Una pared o un objeto con historia, no un cuadro genérico</td><td>Mural, pieza de madera, objeto de diseño</td></tr>
+        <tr><td>Uso diario</td><td>Una prenda que funcione como talismán cotidiano</td><td>Cápsula textil DTF, tiraje corto</td></tr>
+      </table>
+
+      <h3 class="sub">Voz</h3>
+      <p class="cuerpo-txt">
+        La voz sale del cuaderno: frases cortas, primera persona, verbos concretos —trazar, quemar,
+        teñir, pulir— y una imagen del agua o del cuerpo cuando hace falta decir algo difícil.
+        En el texto de obra se escribe en minúsculas y sin punto final, como en el poema.
+      </p>
+
+      <div class="cita">
+        pintar es poder tocar con nuestra vista lo que imaginamos<br>
+        cuando movemos la mano ahi<br>
+        estamos tocando el espacio
+        <cite>Cuaderno de poesía y reflexión · archivo propio</cite>
+      </div>
+
+      <table class="tabla">
+        <tr><th>Sí</th><th>No</th></tr>
+        <tr><td>“Ver la obra”</td><td>“Explorar galería”</td></tr>
+        <tr><td>“Encargar una pieza”</td><td>“Contáctanos”</td></tr>
+        <tr><td>“Leer el proceso”</td><td>“Blog”</td></tr>
+        <tr><td>“Comprar” · “Ver talles”</td><td>“Llevá tu amuleto” (en el carrito, la claridad gana)</td></tr>
+      </table>
+      <p class="dato">
+        La licencia poética vale en la obra y en la bitácora. En la tienda, el botón dice lo que hace.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 02 SISTEMA VISUAL ================= -->
+  <section class="seccion" id="sistema">
+    <header>
+      <span class="num">02</span>
+      <h2 class="rail-title">Guía de estilo<br><em>visual</em></h2>
+    </header>
+
+    <div class="cuerpo">
+      <p class="cuerpo-txt">
+        La paleta no se eligió en una carta: se muestreó de las piezas. El mural Mandarava da el
+        petróleo y el azul pizarra; el pirograbado da la madera y el sepia quemado; el cuaderno y la
+        tinta dan el hueso y el negro. El dorado que aparece en los murales es <strong>material</strong>
+        —pan de oro, hilo, luz—, no un color de interfaz.
+      </p>
+
+      <h3 class="sub">Paleta</h3>
+      <div class="paleta">
+        <div class="sw"><span class="chip" style="background:#EFE9E0"></span><div class="txt"><b>Hueso</b><code>#EFE9E0</code><span>Fondo principal de todo el sitio. Ocupa el 60–70% de la pantalla.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#16120F"></span><div class="txt"><b>Tinta</b><code>#16120F</code><span>Texto, línea de dibujo, tatuaje. Nunca negro puro.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#193A39"></span><div class="txt"><b>Petróleo</b><code>#193A39</code><span>Bloques de contraste, pie de página, fondo de la bitácora.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#3A7775"></span><div class="txt"><b>Verde sábila</b><code>#3A7775</code><span>Acento estructural: enlaces, numeración, estados activos.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#5C94AA"></span><div class="txt"><b>Azul pizarra</b><code>#5C94AA</code><span>Acento frío, tomado del mural. Solo en detalles y gráficos.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#DFBC9C"></span><div class="txt"><b>Arena</b><code>#DFBC9C</code><span>Filetes, subrayados, fondos de ficha. Reemplaza al dorado.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#DBC2AA"></span><div class="txt"><b>Madera</b><code>#DBC2AA</code><span>Fondo de sección de obra física y pirograbado.</span></div></div>
+        <div class="sw"><span class="chip" style="background:#6B5240"></span><div class="txt"><b>Sepia</b><code>#6B5240</code><span>Texto secundario sobre hueso y madera. Nunca para títulos.</span></div></div>
+      </div>
+
+      <div class="reglas">
+        <div class="regla"><b>Proporción</b><span>70% hueso · 20% petróleo o madera · 8% tinta · 2% acento. Si una pantalla pide dos acentos, sobra uno.</span></div>
+        <div class="regla"><b>Planos, no degradados</b><span>El color va en superficies planas. La única transición permitida es una foto que se oscurece para que el texto se lea.</span></div>
+        <div class="regla"><b>Filetes de 1 px</b><span>Separan sin dibujar cajas. Sin sombras, sin bordes redondeados: la obra tiene bordes vivos.</span></div>
+        <div class="regla"><b>Contraste mínimo</b><span>Texto sobre hueso: tinta 15:1, sepia 5,4:1. Sobre petróleo: hueso 12:1. Nunca sepia sobre petróleo.</span></div>
+      </div>
+
+      <h3 class="sub">Tipografía</h3>
+      <div class="muestra">
+        <div class="aa"><span>Aa</span><span class="i">Aa</span></div>
+        <dl>
+          <div><dt>Títulos y citas</dt><dd>Cormorant Garamond 300 / 400 · itálica para poesía</dd></div>
+          <div><dt>Texto y datos</dt><dd>Archivo 400 / 500</dd></div>
+          <div><dt>Escala display</dt><dd>56–96 px · interlínea 0,95 · tracking −0,02 em</dd></div>
+          <div><dt>Cuerpo</dt><dd>17 px · interlínea 1,62 · máximo 62 caracteres</dd></div>
+          <div><dt>Etiquetas</dt><dd>10–11 px · mayúsculas · tracking +0,18 em</dd></div>
+        </dl>
+      </div>
+      <p class="cuerpo-txt" style="margin-top:16px">
+        Dos familias, ninguna decorativa: la serif hace el trabajo emocional —títulos, poemas,
+        nombres de pieza— y la grotesca hace el trabajo práctico —fichas, medidas, precios, botones—.
+        La caligrafía del logotipo <strong>no se imita con una fuente</strong>: el logotipo es un dibujo,
+        se usa como SVG y no se reescribe.
+      </p>
+
+      <h3 class="sub">Línea y textura</h3>
+      <div class="par">
+        <div>
+          <p class="cuerpo-txt">
+            Cada pieza tiene <strong>un solo peso de línea</strong>. La variación de grosor es de la mano,
+            no del sistema: si el dibujo tiene línea fina, la ficha también; si el mural tiene trazo
+            grueso, la foto manda.
+          </p>
+          <p class="cuerpo-txt">
+            En pantalla, el trazo mínimo es 1 px a 1× y 2 px a 2×. Los símbolos se dibujan en SVG,
+            nunca se toman de una librería de iconos.
+          </p>
+        </div>
+        <div>
+          <p class="cuerpo-txt">
+            La textura no se agrega con filtros: viene de la foto. Ningún grano, ruido o “papel”
+            sintético sobre la interfaz —eso compite con la textura real de la obra.
+          </p>
+          <p class="cuerpo-txt">
+            Fondo de sección permitido: un plano de color de la paleta. Prohibido: mármol, mármol
+            dorado, humo, agua, constelaciones de stock.
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub">Dirección de fotografía</h3>
+      <table class="tabla">
+        <tr><th>Soporte</th><th>Cómo se registra</th><th>Qué no</th></tr>
+        <tr><td>Mural</td><td>Plano general con una persona o una puerta para dar escala + detalle de línea a 45°. Luz natural, sin hora azul.</td><td>Fotos inclinadas, filtros, gente posando frente al muro.</td></tr>
+        <tr><td>Pirograbado</td><td>Cenital sobre madera, luz rasante de costado para que se lea el relieve del quemado.</td><td>Flash directo, fondo blanco de catálogo.</td></tr>
+        <tr><td>Cuadro / objeto</td><td>Luz de ventana lateral, fondo muro crudo o hueso, encuadre que incluya el borde de la pieza.</td><td>Marco digital, sombra artificial, mockup de sala.</td></tr>
+        <tr><td>Textil</td><td>Cuerpo real, luz de tarde, fondo liso (muro, piedra). Una toma de producto plano sobre hueso.</td><td>Sonrisa publicitaria, fondo de playa, retoque de piel.</td></tr>
+        <tr><td>Proceso</td><td>Manos, herramientas, bocetos, viruta. Vertical 9:16 para redes y bitácora.</td><td>Timelapse con música épica.</td></tr>
+      </table>
+
+      <h3 class="sub">Sistema simbólico</h3>
+      <p class="cuerpo-txt">
+        El repertorio propio: <strong>unalome, loto, flor de la vida, metatrón, serpiente, colibrí,
+        escarabajo maquech, mandala</strong>. Los que vienen de tradiciones cerradas —Mandarava tibetana,
+        Quetzalcóatl mexica, maquech yucateco— necesitan un protocolo, no una licencia poética.
+      </p>
+      <ul class="pasos">
+        <li>Investigar el origen y el uso ritual antes de dibujar. Guardar la fuente.</li>
+        <li>Escribir en la ficha qué se toma y qué se deja afuera; nunca reducir el símbolo a patrón.</li>
+        <li>Nombrar la tradición de origen en la bitácora y en la ficha de la pieza.</li>
+        <li>Si la comunidad de origen pidió no reproducirlo, no se reproduce. Se elige otro símbolo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 03 ARQUITECTURA ================= -->
+  <section class="seccion" id="arquitectura">
+    <header>
+      <span class="num">03</span>
+      <h2 class="rail-title">Arquitectura<br><em>del sitio</em></h2>
+    </header>
+
+    <div class="cuerpo">
+      <p class="cuerpo-txt">
+        Cinco rutas, ninguna de más. La home presenta; la galería prueba; la tienda cobra;
+        la bitácora explica; el encargo convierte. Nada de “blog + portfolio + shop” conviviendo
+        en una sola página infinita.
+      </p>
+
+      <div class="rutas">
+        <div class="ruta"><b>Umbral</b><code>/</code><p>Quién es y qué hace, en una pantalla.</p></div>
+        <div class="ruta"><b>Obra</b><code>/obra/</code><p>Galería filtrable por disciplina.</p></div>
+        <div class="ruta"><b>Tienda</b><code>/tienda/</code><p>Cápsula textil, tiraje corto.</p></div>
+        <div class="ruta"><b>Bitácora</b><code>/bitacora/</code><p>Símbolos, poemas, proceso en audio.</p></div>
+        <div class="ruta"><b>Encargo</b><code>/encargo/</code><p>Brief, plazos y precios desde.</p></div>
+      </div>
+
+      <h3 class="sub">Home</h3>
+      <div class="wire">
+        <div class="barra"><span>MaCa</span><span>Obra · Tienda · Bitácora · Encargo</span></div>
+        <div class="bloque alto"><b>01 · Umbral</b>Una imagen o video a sangre · nombre dibujado · una línea de manifiesto · “Ver la obra” / “Encargar una pieza”</div>
+        <div class="bloque"><b>02 · La línea</b>Dos frases grandes + cuatro versos del cuaderno</div>
+        <div class="fila c2">
+          <div class="bloque alto"><b>03 · Obra I</b>Pieza destacada · ficha: título, técnica, año, medidas</div>
+          <div class="bloque alto"><b>04 · Obra II</b>Pieza destacada · ficha</div>
+        </div>
+        <div class="bloque"><b>05 · Símbolo de la temporada</b>Lectura de un símbolo: origen, trazo, en qué piezas aparece → bitácora</div>
+        <div class="fila c3">
+          <div class="bloque alto"><b>06 · Prenda</b>Mockup + nombre + precio</div>
+          <div class="bloque alto"><b>07 · Prenda</b>Mockup + nombre + precio</div>
+          <div class="bloque alto"><b>08 · Prenda</b>Mockup + nombre + precio</div>
+        </div>
+        <div class="bloque"><b>09 · Bitácora</b>Último audio con su transcripción + poema</div>
+        <div class="bloque"><b>10 · Encargo</b>Qué aceptás, en cuánto tiempo, desde cuánto</div>
+        <div class="nota">Orden deliberado: obra primero, tienda después. Quien llega por el arte no debe aterrizar en un carrito.</div>
+      </div>
+
+      <h3 class="sub">Obra</h3>
+      <p class="cuerpo-txt">
+        Filtros por disciplina —<strong>Mural · Madera · Tela · Papel · Piel</strong>— y por año.
+        Cada pieza abre una ficha con visor de detalle: zoom real sobre el trazo, no un lightbox
+        que solo agranda.
+      </p>
+      <div class="wire">
+        <div class="barra"><span>Obra</span><span>Filtros: Mural · Madera · Tela · Papel · Piel · 2024–2026</span></div>
+        <div class="fila c4">
+          <div class="bloque alto"><b>Pieza</b>4:5 · título · técnica · año</div>
+          <div class="bloque alto"><b>Pieza</b>4:5</div>
+          <div class="bloque alto"><b>Pieza</b>4:5</div>
+          <div class="bloque alto"><b>Pieza</b>4:5</div>
+        </div>
+        <div class="nota">Ficha de pieza: imagen principal · dos detalles · texto de 60–90 palabras · símbolo y su lectura · medidas y disponibilidad.</div>
+      </div>
+
+      <h3 class="sub">Tienda</h3>
+      <p class="cuerpo-txt">
+        La cápsula son <strong>prendas base intervenidas</strong>: remera, buzo, top de manga corta y
+        manga campana, en los neutros del muestrario (arena, hueso, taupe). No hay carrito propio:
+        el checkout va a Mercado Pago o a Tiendanube. Construir un carrito en GitHub Pages es
+        regalarle el problema de los pagos a un sitio estático.
+      </p>
+      <div class="wire">
+        <div class="barra"><span>Tienda</span><span>Carrito → checkout externo</span></div>
+        <div class="fila c3">
+          <div class="bloque alto"><b>Producto</b>Mockup · nombre · precio · talles</div>
+          <div class="bloque alto"><b>Producto</b>Mockup</div>
+          <div class="bloque alto"><b>Producto</b>Mockup</div>
+        </div>
+        <div class="nota">Ficha de prenda: composición, cuidado del estampado DTF, tabla de talles real, tiempo de producción (a pedido), política de cambio.</div>
+      </div>
+
+      <h3 class="sub">Bitácora</h3>
+      <p class="cuerpo-txt">
+        Entradas cortas y fechadas. Cada una puede traer un audio de proceso con su transcripción
+        —el audio es la voz, la transcripción es la accesibilidad y el SEO—. Etiquetas:
+        <em>símbolos</em>, <em>poemas</em>, <em>proceso</em>, <em>oficio</em>.
+      </p>
+
+      <h3 class="sub">Encargo</h3>
+      <div class="wire">
+        <div class="barra"><span>Encargo</span><span>Respuesta en 48 h</span></div>
+        <div class="bloque"><b>Qué pedimos</b>Tipo de pieza · medidas o prenda · fecha · dónde va a vivir · una referencia que te guste y una que no</div>
+        <div class="bloque"><b>Qué devolvemos</b>Propuesta de trazo y símbolo · presupuesto · anticipo del 50% · fechas</div>
+        <div class="nota">Sin formulario de veinte campos. Cinco preguntas y un archivo adjunto opcional.</div>
+      </div>
+
+      <h3 class="sub">Estados que hay que diseñar</h3>
+      <div class="par">
+        <div>
+          <p class="cuerpo-txt"><strong>Galería vacía:</strong> una frase y el enlace a la bitácora. No un icono triste.</p>
+          <p class="cuerpo-txt"><strong>Prenda agotada:</strong> “tiraje cerrado” + lista de espera, no “sin stock”.</p>
+        </div>
+        <div>
+          <p class="cuerpo-txt"><strong>404:</strong> “esta página se quemó como la madera” + volver a obra.</p>
+          <p class="cuerpo-txt"><strong>Error de formulario:</strong> dice qué falta y cómo arreglarlo, en la voz del sitio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 BRIEF TÉCNICO ================= -->
+  <section class="seccion" id="tecnico">
+    <header>
+      <span class="num">04</span>
+      <h2 class="rail-title">Brief técnico<br><em>para desarrollo</em></h2>
+    </header>
+
+    <div class="cuerpo">
+      <p class="cuerpo-txt">
+        El sitio es estático: HTML, CSS y un poco de JavaScript, publicado en GitHub Pages.
+        Sin framework, sin build obligatorio, sin base de datos. Todo lo que necesite pagos
+        o stock vive afuera y se enlaza.
+      </p>
+
+      <h3 class="sub">Estructura de archivos</h3>
+      <table class="tabla">
+        <tr><th>Carpeta</th><th>Contenido</th><th>Peso objetivo</th></tr>
+        <tr><td>/</td><td>index.html · 404.html · style.css · main.js</td><td>&lt; 120 KB</td></tr>
+        <tr><td>/obra/</td><td>obra.html + fichas generadas desde un JSON</td><td>—</td></tr>
+        <tr><td>/img/obra/</td><td>Una pieza por carpeta: 4 tamaños en WebP</td><td>≤ 180 KB por archivo</td></tr>
+        <tr><td>/img/textil/</td><td>Mockups (cuerpo y plano), fondo transparente</td><td>≤ 120 KB</td></tr>
+        <tr><td>/img/simbolos/</td><td>SVG de un solo color, trazo expandido</td><td>≤ 8 KB</td></tr>
+        <tr><td>/media/</td><td>MP4 de loop y audio M4A + transcripción</td><td>≤ 6 MB / ≤ 3 MB</td></tr>
+      </table>
+
+      <h3 class="sub">Assets por tipo de pieza</h3>
+      <table class="tabla">
+        <tr><th>Uso</th><th>Formato</th><th>Medida</th><th>Nota</th></tr>
+        <tr><td>Grilla</td><td>WebP + JPEG</td><td>1200 px lado mayor</td><td>4:5 vertical para obra plana</td></tr>
+        <tr><td>Ficha / visor</td><td>WebP + JPEG</td><td>2000 px</td><td>Permite zoom 2× sobre el trazo</td></tr>
+        <tr><td>Detalle macro</td><td>WebP</td><td>2400 px</td><td>Textura de madera o quemado</td></tr>
+        <tr><td>Mural panorámico</td><td>WebP</td><td>3000 px</td><td>Se sirve solo en la ficha</td></tr>
+        <tr><td>Video de umbral</td><td>MP4 H.264</td><td>1920×1080 · 8–12 s</td><td>Sin audio, loop, poster obligatorio</td></tr>
+        <tr><td>Audio de bitácora</td><td>M4A 128 kbps</td><td>—</td><td>Siempre con transcripción visible</td></tr>
+        <tr><td>Logotipo</td><td>SVG</td><td>—</td><td>Versión tinta y versión hueso</td></tr>
+      </table>
+
+      <h3 class="sub">Componentes que hay que construir</h3>
+      <ul class="pasos">
+        <li><strong>Visor de detalle:</strong> zoom con scroll o pinza, arrastre para mover, doble clic para volver. Respeta <code>prefers-reduced-motion</code>.</li>
+        <li><strong>Reproductor de audio:</strong> barra simple, sin olas decorativas, con transcripción desplegable y descarga.</li>
+        <li><strong>Filtros de obra:</strong> sin recarga, estado en la URL (<code>?disc=pirograbado</code>) para poder compartir.</li>
+        <li><strong>Lista de espera:</strong> email + talle, guardado en un servicio externo (Formspree o similar).</li>
+        <li><strong>Formulario de encargo:</strong> cinco campos, validación en línea, mensaje de error específico, adjunto opcional de 10 MB.</li>
+        <li><strong>Botón de compra:</strong> enlace directo al checkout externo con el SKU en la URL.</li>
+      </ul>
+
+      <h3 class="sub">Rendimiento, accesibilidad y SEO</h3>
+      <div class="par">
+        <div>
+          <p class="cuerpo-txt">LCP menor a 2,5 s en 4G. Imágenes con <code>loading="lazy"</code> salvo la del umbral, que se precarga.</p>
+          <p class="cuerpo-txt">Fuentes con <code>font-display: swap</code> y subset latin; peso total de fuentes menor a 90 KB.</p>
+          <p class="cuerpo-txt">Contraste AA mínimo 4,5:1 en todo texto; foco visible; objetivos táctiles de 44 px.</p>
+        </div>
+        <div>
+          <p class="cuerpo-txt">Cada pieza con <code>alt</code> real: título, técnica y año. Los SVG decorativos, con <code>aria-hidden</code>.</p>
+          <p class="cuerpo-txt">Título y descripción propios por ficha, más <code>og:image</code> de la pieza: es lo que se ve al compartir por WhatsApp.</p>
+          <p class="cuerpo-txt">Navegación por teclado completa; el visor se cierra con Escape.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Nombres de archivo</h3>
+      <p class="cuerpo-txt">
+        Minúsculas, sin acentos ni espacios, con año y slug:
+        <code>2024-mural-mandarava-01.webp</code> · <code>2025-pirograbado-plato-pluma-02.webp</code> ·
+        <code>2026-textil-top-arena-01.webp</code>. Un nombre así ordena solo y evita duplicados.
+      </p>
+
+      <h3 class="sub">Qué falta en el archivo local</h3>
+      <table class="tabla">
+        <tr><th>Falta</th><th>Por qué importa</th><th>Cómo se resuelve</th></tr>
+        <tr><td>Fotos de obra terminada</td><td>Hay mucha foto de proceso y referencia, poca pieza terminada y bien iluminada</td><td>Una sesión de registro por disciplina, con la dirección de foto de arriba</td></tr>
+        <tr><td>Mockups de la cápsula</td><td>Existen patrones y un mockup plano; falta la prenda puesta</td><td>Una producción de 3 horas con dos personas y luz de tarde</td></tr>
+        <tr><td>Transcripción del audio</td><td>El video “Símbolos que codifican” está sin transcribir</td><td>Transcribir y usar el texto como primera entrada de bitácora</td></tr>
+        <tr><td>Fichas técnicas</td><td>Sin medidas, año y técnica no hay catálogo posible</td><td>Completar una planilla por pieza antes de maquetar</td></tr>
+        <tr><td>Textos de símbolo</td><td>La lectura de cada símbolo es el diferenciador</td><td>Escribir 90 palabras por símbolo, con fuente citada</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= APÉNDICE ================= -->
+  <section class="apendice">
+    <header>
+      <span class="num">Anexo</span>
+      <h2 class="rail-title">Método y<br><em>límites</em></h2>
+    </header>
+    <div class="cuerpo">
+      <h3>Qué se revisó</h3>
+      <ul>
+        <li><strong>Logotipo:</strong> <code>Pictures\LOGOTIPO</code> — firma dibujada “MaCa”, dos flores en tallo, base de pétalos; versiones en tinta y en blanco.</li>
+        <li><strong>Mural:</strong> <code>Pictures\Mural Mandarava</code> (42 archivos) y <code>Pictures\Cuadro Planos</code> — muro petróleo con línea arena, proceso de agosto de 2026.</li>
+        <li><strong>Pirograbado:</strong> <code>Pictures\Pirograbado\Claudia</code> — mandala con flor de la vida, plato con pluma y yopo.</li>
+        <li><strong>Símbolos y tatuaje:</strong> <code>Pictures\Quetzacoatl</code> (28), <code>Pictures\UnalomeLoto Aislent</code> (14), <code>Pictures\Catalogo FlashTatoo</code> — hojas de flash geométrico-botánicas.</li>
+        <li><strong>Textil:</strong> <code>Pictures\Diseño de ropa</code> — patrones de escote cuadrado, manga corta y campana, top básico, mockups DTF.</li>
+        <li><strong>Voz:</strong> <code>Documents\Poesia Pensamiento Reflexion.docx</code> — 13 párrafos leídos; de ahí salen el tono y la cita.</li>
+        <li><strong>Contexto:</strong> <code>Documents\Material de estudio para las clases</code> — arteterapia y adicciones (formación, no cliente).</li>
+      </ul>
+
+      <h3>Qué no se pudo verificar</h3>
+      <ul>
+        <li>No hay archivos <code>.afdesign</code> en las carpetas revisadas; sí 25 archivos <code>.af</code> de Affinity y 30 <code>.kra</code> de Krita, que no se pueden abrir como imagen.</li>
+        <li>El video <code>Videos\audio Simbolos que codifican</code> es un MP4 sin extensión: no se revisó su contenido ni existe transcripción.</li>
+        <li>El audio propio (<code>.wav</code>, <code>.ogg</code>, <code>.mp3</code>) no se transcribió: la voz se describe por el cuaderno, no por la grabación.</li>
+        <li>Las carpetas de clientes (BOCABOX, JUAN, BitSolutions, Santo Gar, ImagenNewDerm) quedaron fuera de la paleta: son trabajo por encargo, no lenguaje de marca.</li>
+        <li>Algunas imágenes de referencia dentro de las series (por ejemplo el ángel de metatrón) no son obra propia y no se usaron como evidencia de estilo.</li>
+      </ul>
+
+      <h3>Decisiones que quedan abiertas</h3>
+      <ul>
+        <li>¿El nombre público es <strong>MaCa</strong>, <strong>Macagráfica</strong> o el nombre propio? El logotipo dice MaCa; el usuario de GitHub dice macagraf.</li>
+        <li>¿La tienda abre con la cápsula completa o con dos prendas y lista de espera?</li>
+        <li>¿Los murales se ofrecen por encargo en otras ciudades o solo en la propia?</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>MaCa · Manual de marca y arquitectura web · versión 1</span>
+    <span>Octubre de 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
