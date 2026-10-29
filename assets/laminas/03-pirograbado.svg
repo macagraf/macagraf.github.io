@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1400" preserveAspectRatio="xMidYMid slice">
+<rect width="1400" height="1400" fill="#14110D"/>
+<g stroke="rgba(236,231,223,0.08)" stroke-width="1.5"><line x1="140" y1="700" x2="1260" y2="700"/><line x1="700" y1="140" x2="700" y2="1260"/></g>
+<g fill="none" stroke="rgba(236,231,223,0.1)" stroke-width="2.5" >
+<circle cx="700" cy="700" r="560"/>
+</g>
+<g fill="none" stroke="rgba(236,231,223,0.28)" stroke-width="2.5" >
+<polygon points="700.0,300.0 353.6,900.0 1046.4,900.0"/>
+<polygon points="700.0,1100.0 1046.4,500.0 353.6,500.0"/>
+</g>
+<g fill="none" stroke="rgba(217,96,59,0.55)" stroke-width="2.5" stroke-dasharray="1 14" stroke-linecap="round">
+<circle cx="700" cy="700" r="238"/>
+</g>
+<circle cx="700" cy="700" r="5" fill="rgba(217,96,59,0.75)" stroke="none"/>
+</svg>
