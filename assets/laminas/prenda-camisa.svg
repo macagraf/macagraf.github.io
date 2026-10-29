@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1560" preserveAspectRatio="xMidYMid slice">
+<rect width="1200" height="1560" fill="#14110D"/>
+<g stroke="rgba(236,231,223,0.07)" stroke-width="1.5"><line x1="80" y1="780" x2="1120" y2="780"/><line x1="600" y1="260" x2="600" y2="1300"/></g>
+<g transform="translate(200,280) scale(3)" fill="none" stroke-width="3">
+<g stroke="rgba(236,231,223,0.34)">
+<path d="M172,110 L128,122 L96,182 L130,202 L146,190 L138,424 Q200,436 262,424 L254,190 L270,202 L304,182 L268,122 L228,110 L200,134 L172,110 Z"/></g>
+<g stroke="rgba(236,231,223,0.18)" stroke-width="2">
+<path d="M200,134 L200,420"/>
+<path d="M172,110 L186,98 L200,134"/>
+<path d="M228,110 L214,98 L200,134"/>
+<rect x="236" y="220" width="30" height="40"/>
+</g>
+<g stroke="rgba(217,96,59,0.6)" stroke-width="2.5">
+<circle cx="166" cy="245" r="24"/>
+<circle cx="166" cy="245" r="38"/>
+</g>
+</g>
+</svg>
