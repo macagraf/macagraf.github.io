@@ -78,6 +78,8 @@ a{color:inherit}
 .d2{animation-delay:.5s}.d3{animation-delay:.85s}
 @keyframes draw{to{stroke-dashoffset:0}}
 .hero__in{position:relative;z-index:1}
+.hero__logo{display:block;height:clamp(92px,13vh,140px);width:auto;
+  margin-bottom:clamp(18px,3vh,30px)}
 .kicker{color:var(--ember-txt);margin-bottom:clamp(22px,3.4vh,36px)}
 .display{font-size:clamp(52px,10.5vw,162px);line-height:.94;font-weight:700;
   text-transform:uppercase;letter-spacing:-.02em;margin-bottom:clamp(30px,4.6vh,52px)}
@@ -234,6 +236,7 @@ a{color:inherit}
     </div>
 
     <div class="wrap hero__in">
+      <img class="hero__logo" src="assets/logo-maca.png" alt="Logotipo MaCa">
       <p class="mono kicker">Ilustración · geometría sagrada · naturalismo</p>
       <h1 class="display">Compás,<br>tinta<br>y <span class="fire">fuego.</span></h1>
       <div class="hero__foot">
