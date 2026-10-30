@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1560" preserveAspectRatio="xMidYMid slice">
-<rect width="1200" height="1560" fill="#14110D"/>
-<g stroke="rgba(236,231,223,0.07)" stroke-width="1.5"><line x1="80" y1="780" x2="1120" y2="780"/><line x1="600" y1="260" x2="600" y2="1300"/></g>
+<rect width="1200" height="1560" fill="#232529"/>
+<g stroke="rgba(239,233,225,0.07)" stroke-width="1.5"><line x1="80" y1="780" x2="1120" y2="780"/><line x1="600" y1="260" x2="600" y2="1300"/></g>
 <g transform="translate(200,280) scale(3)" fill="none" stroke-width="3">
-<g stroke="rgba(236,231,223,0.34)">
+<g stroke="rgba(239,233,225,0.34)">
 <path d="M164,116 L122,126 L92,190 L130,212 L146,198 L140,430 Q200,444 260,430 L254,198 L270,212 L308,190 L276,126 L236,116 Q200,146 164,116 Z"/></g>
-<g stroke="rgba(236,231,223,0.18)" stroke-width="2">
+<g stroke="rgba(239,233,225,0.18)" stroke-width="2">
 <path d="M164,116 Q200,168 236,116"/>
 <path d="M150,330 L150,400 L250,400 L250,330"/>
 <path d="M190,146 L186,196"/>
 <path d="M210,146 L214,196"/>
 </g>
-<g stroke="rgba(217,96,59,0.6)" stroke-width="2.5">
+<g stroke="rgba(210,105,30,0.6)" stroke-width="2.5">
 <circle cx="200" cy="255" r="26"/>
 <circle cx="226.0" cy="255.0" r="26"/>
 <circle cx="213.0" cy="277.5" r="26"/>
