@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maca — Ilustración de línea fina</title>
-<meta name="description" content="Geometría sagrada y naturalismo. Ilustración de línea fina para tatuaje, cuadro, mural y pirograbado; serie textil en desarrollo.">
+<meta name="description" content="Geometría sagrada y naturalismo. Mural, ilustración digital editorial, textil y pirograbado de línea fina.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#2b2d31">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Maca — Ilustración de línea fina">
-<meta property="og:description" content="Geometría sagrada y naturalismo. Tatuaje, cuadro, mural, pirograbado y textil.">
+<meta property="og:description" content="Geometría sagrada y naturalismo. Mural, editorial, textil y pirograbado.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232b2d31'/%3E%3Cg fill='none' stroke='%23d2691e' stroke-width='1.5'%3E%3Ccircle cx='32' cy='32' r='23'/%3E%3Ccircle cx='32' cy='9' r='23'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,8 +78,8 @@ a{color:inherit}
 .d2{animation-delay:.5s}.d3{animation-delay:.85s}
 @keyframes draw{to{stroke-dashoffset:0}}
 .hero__in{position:relative;z-index:1}
-.hero__logo{display:block;height:clamp(92px,13vh,140px);width:auto;
-  margin-bottom:clamp(18px,3vh,30px)}
+.hero__sign{position:absolute;z-index:2;top:var(--sign-top,60px);left:var(--sign-x,50%);
+  translate:-50% 0;height:clamp(64px,8.5vh,100px);width:auto;opacity:.85;pointer-events:none}
 .kicker{color:var(--ember-txt);margin-bottom:clamp(22px,3.4vh,36px)}
 .display{font-size:clamp(52px,10.5vw,162px);line-height:.94;font-weight:700;
   text-transform:uppercase;letter-spacing:-.02em;margin-bottom:clamp(30px,4.6vh,52px)}
@@ -96,27 +96,40 @@ a{color:inherit}
 .h2{font-size:clamp(30px,4.2vw,56px);font-weight:700;letter-spacing:-.02em;line-height:1.04;max-width:24ch}
 
 /* ── obra ── */
-.plates{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.5vw,32px)}
-.p1{grid-column:1/8}
-.p2{grid-column:8/13;margin-top:clamp(56px,9vw,150px)}
-.p3{grid-column:1/6;margin-top:clamp(8px,1.5vw,24px)}
-.p4{grid-column:6/13;margin-top:clamp(56px,9vw,150px)}
-.frame{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line-2);
-  padding:25px}
-.p1 .frame{aspect-ratio:4/5}
-.p2 .frame{aspect-ratio:3/4}
-.p3 .frame{aspect-ratio:1/1}
-.p4 .frame{aspect-ratio:16/9}
-.flat .frame{aspect-ratio:400/520}
-.frame img{position:absolute;inset:25px;object-fit:cover;
-  transition:transform .8s cubic-bezier(.2,.6,.2,1),opacity .5s ease}
-.frame:hover img{transform:scale(1.035)}
+.item{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);
+  gap:clamp(24px,4vw,64px);align-items:start;
+  padding-block:clamp(40px,6vh,76px);border-top:1px solid var(--line-2)}
+.item:first-of-type{border-top:0;padding-top:0}
+.item__meta{color:var(--ember)}
+.item__title{font-size:clamp(26px,3.3vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05;
+  margin-top:10px;max-width:22ch}
+.item__desc{margin-top:16px;color:var(--mut);font-size:15.5px;max-width:38ch}
+.tag{display:inline-block;margin-top:20px;padding:5px 11px;border:1px solid rgba(210,105,30,.55);
+  color:var(--ember-txt);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+
+/* carrusel: las fotos de una misma obra se apilan y pasan con los botones */
+.deck{--pad:clamp(10px,1.5vw,22px);position:relative;width:100%;overflow:hidden;
+  aspect-ratio:var(--ar,4/3);background:var(--panel);border:1px solid var(--line-2);
+  transition:height .55s cubic-bezier(.2,.6,.2,1)}
+.deck__slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease}
+.deck__slide.is-current{opacity:1;pointer-events:auto}
+.deck__art{position:absolute;inset:var(--pad);width:calc(100% - var(--pad) * 2);
+  height:calc(100% - var(--pad) * 2);object-fit:cover;display:block;background:transparent}
+.deck__art--contain{object-fit:contain}
+.deck__nav{display:flex;gap:8px;margin-top:14px}
+.deck__btn{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--mut);background:transparent;border:1px solid var(--line);
+  padding:7px 15px;cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+.deck__btn:hover{color:var(--bone);border-color:rgba(239,233,225,.34)}
+.deck__btn.is-on{background:var(--ember);border-color:var(--ember);color:#2B2D31;font-weight:600}
+
+/* zoom de detalle: 1,5× desde el punto donde está el cursor */
+.zoom{--ox:50%;--oy:50%}
+.zoom img{transform-origin:var(--ox) var(--oy);
+  transition:transform .55s cubic-bezier(.2,.6,.2,1),opacity .5s ease}
+@media (hover:hover) and (pointer:fine){.zoom:hover img{transform:scale(1.5)}}
 .frame__art{opacity:0}
 .frame__art.is-art{opacity:1}
-.cap{display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
-.cap .mono:first-child{color:var(--ember)}
-.cap__t{font-size:clamp(18px,1.8vw,22px);font-weight:600}
-.cap__m{margin-left:auto;color:var(--dim)}
 
 /* ── cita ── */
 .quote{padding-block:clamp(96px,14vh,176px);border-top:1px solid var(--line-2)}
@@ -125,14 +138,9 @@ a{color:inherit}
 .quote p span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--ember)}
 @supports not (-webkit-text-stroke:1px #000){.quote p span{color:var(--ember)}}
 
-/* ── textil ── */
-.sec--textil{background:var(--bg-2)}
-.textil__top{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;
-  margin-bottom:clamp(40px,6vh,72px)}
-.textil__top .lede{max-width:44ch}
-.flats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,32px)}
-.flat figcaption{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
-.textil__note{margin-top:clamp(32px,5vh,56px);color:var(--dim)}
+/* ── rubros ── */
+.sec--alt{background:var(--bg-2)}
+.sec__note{margin-top:clamp(28px,4vh,44px);color:var(--dim)}
 
 /* ── sobre ── */
 .sobre__grid{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:clamp(24px,4vw,64px)}
@@ -159,11 +167,12 @@ a{color:inherit}
   background:radial-gradient(90% 70% at 50% 115%,#34373D 0%,var(--bg) 62%)}
 .ct__big{font-size:clamp(56px,11vw,148px);font-weight:700;letter-spacing:-.02em;line-height:.95;
   margin:14px 0 clamp(24px,4vh,44px)}
-.ct__mail{display:inline-block;font-size:clamp(24px,3.6vw,48px);font-weight:500;text-decoration:underline;
+.ct__mail{display:inline-block;max-width:100%;font-size:clamp(20px,3.6vw,48px);font-weight:500;text-decoration:underline;
+  overflow-wrap:anywhere;
   text-decoration-color:var(--ember);text-decoration-thickness:2px;text-underline-offset:12px;transition:color .25s}
 .ct__mail:hover{color:var(--ember-txt)}
 .ct__note{color:var(--mut);margin-top:22px}
-.ct__links{display:flex;gap:28px;margin-top:clamp(28px,4vh,48px)}
+.ct__links{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:clamp(28px,4vh,48px)}
 .ct__links a{color:var(--mut);text-decoration:none;transition:color .25s}
 .ct__links a:hover{color:var(--ember-txt)}
 
@@ -172,38 +181,38 @@ a{color:inherit}
 .foot__grid{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .foot p{color:var(--dim)}
 
-/* ── reveal ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-.reveal.is-in{opacity:1;transform:none}
-
 /* ── responsive ── */
 @media (max-width:900px){
-  .plates{grid-template-columns:1fr;gap:40px}
-  .p1,.p2,.p3,.p4{grid-column:1/-1;margin-top:0}
-  .flats{grid-template-columns:1fr}
+  .item{grid-template-columns:1fr;gap:18px;padding-block:clamp(34px,5vh,52px)}
+  .item:first-of-type{padding-top:0}
+  .item__desc{max-width:none}
   .sobre__grid,.enc__grid{grid-template-columns:1fr}
   .craft{grid-template-columns:1fr}
   .enc li{grid-template-columns:1fr;gap:8px}
   .hero__geom{right:-42%;width:130vw;opacity:.22}
+  .hero__sign{display:none}
   .hero__foot{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .draw{animation:none;stroke-dashoffset:0}
-  .reveal{opacity:1;transform:none;transition:none}
-  .frame img{transition:none}
+  .zoom img{transition:none}
+  .zoom:hover img{transform:none}
+  .deck{transition:none}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#obra">Saltar a la obra</a>
+<a class="skip" href="#murales">Saltar a la obra</a>
 
 <header class="masthead">
   <div class="masthead__in">
     <a class="wordmark" href="#inicio">Maca<b>.</b></a>
     <nav class="nav" aria-label="Secciones">
-      <a href="#obra">Obra</a>
+      <a href="#murales">Murales</a>
       <a href="#textil">Textil</a>
+      <a href="#editorial">Editorial</a>
+      <a href="#pirograbado">Pirograbado</a>
       <a href="#sobre">Sobre</a>
       <a href="#encargos">Encargos</a>
       <a href="#contacto">Contacto</a>
@@ -235,85 +244,220 @@ a{color:inherit}
       </svg>
     </div>
 
+    <img class="hero__sign" src="assets/logo-maca.png" alt="Logotipo MaCa">
+
     <div class="wrap hero__in">
-      <img class="hero__logo" src="assets/logo-maca.png" alt="Logotipo MaCa">
       <p class="mono kicker">Ilustración · geometría sagrada · naturalismo</p>
       <h1 class="display">Compás,<br>tinta<br>y <span class="fire">fuego.</span></h1>
       <div class="hero__foot">
         <p class="lede">Dibujo con línea fina desde dos puntos fijos: la proporción de la geometría sagrada y la forma observada del natural. La misma línea se traza en papel, se tatúa en piel, se quema en madera y se imprime en tela.</p>
         <ul class="media">
-          <li>Tatuaje</li>
-          <li>Cuadro</li>
           <li>Mural</li>
-          <li>Pirograbado</li>
+          <li>Editorial</li>
           <li>Textil</li>
+          <li>Pirograbado</li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- ── Obra ────────────────────────────────────────────────────── -->
-  <section class="sec" id="obra">
+  <section class="sec" id="murales">
     <div class="wrap">
-      <h2 class="sr">Obra</h2>
+      <h2 class="sr">Murales</h2>
       <div class="sec__head">
-        <p class="mono">01 — Obra</p>
-        <p class="mono">Cuatro técnicas, un mismo trazo</p>
+        <p class="mono">01 — Murales</p>
+        <p class="mono">Pintura sobre muro</p>
       </div>
 
-      <div class="plates">
-        <figure class="plate plate--mat p1 reveal">
-          <div class="plate__mat">
-            <div class="frame">
-              <img src="assets/laminas/01-tatuaje.svg" alt="" aria-hidden="true">
-              <img class="frame__art" src="assets/laminas/01-tatuaje.jpg" alt="Tatuaje de línea fina: semilla de la vida construida con compás." loading="lazy">
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Mural</p>
+          <h3 class="item__title">Mandarava</h3>
+          <p class="item__desc">Reproducción/cita del Thangka original de Padmasambhava en el Tíbet. Primero se retícula y proporciona el boceto sobre el muro; el color se pinta desde el fondo hacia el centro, y lo último que se pinta son los ojos: las pupilas de la deidad.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:1.334">
+            <div class="deck__slide is-current" data-ar="1.334">
+              <img class="deck__art" src="assets/laminas/04-mural.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/04-mural-mandarava.jpg" alt="Mural de Mandarava pintado a mano sobre el muro." loading="lazy">
+            </div>
+            <div class="deck__slide" data-ar="0.75">
+              <img class="deck__art" src="assets/laminas/04-mural-detalle.jpg" alt="Detalle del mural de Mandarava: trabajo de línea y color." loading="lazy">
             </div>
           </div>
-          <figcaption class="cap">
-            <span class="mono">01</span>
-            <span class="cap__t">Tatuaje</span>
-            <span class="mono cap__m">Tinta sobre piel</span>
-          </figcaption>
-        </figure>
-
-        <figure class="plate p2 reveal">
-          <div class="frame">
-            <img src="assets/laminas/02-cuadro.svg" alt="" aria-hidden="true">
-            <img class="frame__art" src="assets/laminas/02-cuadro.jpg" alt="Cuadro de línea fina: roseta de doce pétalos sobre papel." loading="lazy">
+          <div class="deck__nav" role="group" aria-label="Fotos de Mandarava">
+            <button class="deck__btn is-on" type="button" aria-pressed="true">01</button>
+            <button class="deck__btn" type="button" aria-pressed="false">02</button>
           </div>
-          <figcaption class="cap">
-            <span class="mono">02</span>
-            <span class="cap__t">Cuadro</span>
-            <span class="mono cap__m">Papel de algodón</span>
-          </figcaption>
-        </figure>
+        </div>
+      </article>
 
-        <figure class="plate plate--mat p3 reveal">
-          <div class="plate__mat">
-            <div class="frame">
-              <img src="assets/laminas/03-pirograbado.svg" alt="" aria-hidden="true">
-              <img class="frame__art" src="assets/laminas/03-pirograbado.jpg" alt="Pirograbado: hexagrama quemado sobre madera." loading="lazy">
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Mural</p>
+          <h3 class="item__title">Mandala</h3>
+          <p class="item__desc">Geometría sagrada trazada con compás sobre el muro. La foto y, detrás, el video del proceso corriendo en loop.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:1.334">
+            <div class="deck__slide is-current" data-ar="1.334">
+              <img class="deck__art" src="assets/laminas/05-mural-mandala.jpg" alt="Mural de mandala de geometría sagrada pintado a mano sobre el muro." loading="lazy">
+            </div>
+            <div class="deck__slide" data-ar="0.5625" data-fit="contain">
+              <video class="deck__art deck__art--contain" src="assets/video/mural-mandala.mp4" poster="assets/laminas/05-mural-mandala-video.jpg" muted loop playsinline preload="metadata" role="img" aria-label="Video del proceso del mural Mandala, en loop."></video>
             </div>
           </div>
-          <figcaption class="cap">
-            <span class="mono">03</span>
-            <span class="cap__t">Pirograbado</span>
-            <span class="mono cap__m">Pirógrafo sobre madera</span>
-          </figcaption>
-        </figure>
-
-        <figure class="plate p4 reveal">
-          <div class="frame">
-            <img src="assets/laminas/04-mural.svg" alt="" aria-hidden="true">
-            <img class="frame__art" src="assets/laminas/04-mural.jpg" alt="Mural: tres círculos trazados con compás sobre muro." loading="lazy">
+          <div class="deck__nav" role="group" aria-label="Foto y video de Mandala">
+            <button class="deck__btn is-on" type="button" aria-pressed="true" aria-label="Foto del mural">01</button>
+            <button class="deck__btn" type="button" aria-pressed="false" aria-label="Video del proceso">02</button>
           </div>
-          <figcaption class="cap">
-            <span class="mono">04</span>
-            <span class="cap__t">Mural</span>
-            <span class="mono cap__m">Pintura sobre muro</span>
-          </figcaption>
-        </figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="textil">
+    <div class="wrap">
+      <h2 class="sr">Textil</h2>
+      <div class="sec__head">
+        <p class="mono">02 — Textil</p>
+        <p class="mono">Serie en desarrollo</p>
       </div>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Textil</p>
+          <h3 class="item__title">Franela oversize</h3>
+          <p class="item__desc">Básico de corte amplio con la ilustración aplicada al pecho. La geometría se reduce hasta volverse emblema.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:0.769">
+            <div class="deck__slide is-current" data-ar="0.769">
+              <img class="deck__art" src="assets/laminas/prenda-franela.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/prenda-franela.jpg" alt="Franela oversize con ilustración geométrica en el pecho." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Textil</p>
+          <h3 class="item__title">Sudadera con capucha</h3>
+          <p class="item__desc">La misma serie, el mismo motivo a otra escala. La capucha cambia el modo en que la línea cae sobre el cuerpo.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:0.769">
+            <div class="deck__slide is-current" data-ar="0.769">
+              <img class="deck__art" src="assets/laminas/prenda-sudadera.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/prenda-sudadera.jpg" alt="Sudadera con capucha y motivo geométrico en el pecho." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Textil</p>
+          <h3 class="item__title">Camisa</h3>
+          <p class="item__desc">El trazo del papel pasado a la tela: línea fina, sin relleno, sostenida por la trama del tejido.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:0.769">
+            <div class="deck__slide is-current" data-ar="0.769">
+              <img class="deck__art" src="assets/laminas/prenda-camisa.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/prenda-camisa.jpg" alt="Camisa con ilustración de línea fina en el pecho." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <p class="mono sec__note">Serie en desarrollo · moldes y estampas en ajuste</p>
+    </div>
+  </section>
+
+  <section class="sec" id="editorial">
+    <div class="wrap">
+      <h2 class="sr">Editorial</h2>
+      <div class="sec__head">
+        <p class="mono">03 — Editorial</p>
+        <p class="mono">Ilustración digital y publicaciones</p>
+      </div>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Ilustración digital</p>
+          <h3 class="item__title">Fruto de la Vida</h3>
+          <p class="item__desc">Interpretación del Fruto de la Vida. La semilla de la vida trazada con compás y resuelta en línea fina sobre fondo negro.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:1">
+            <div class="deck__slide is-current" data-ar="1">
+              <img class="deck__art" src="assets/laminas/01-tatuaje.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/01-fruto-de-la-vida.jpg" alt="Fruto de la Vida: ilustración digital de línea fina construida con compás." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Ilustración digital</p>
+          <h3 class="item__title">Vésica Piscis</h3>
+          <p class="item__desc">Interpretación de Vésica Piscis. Dos círculos iguales que se cruzan y abren el tercero: la forma que sostiene toda la serie.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:1">
+            <div class="deck__slide is-current" data-ar="1">
+              <img class="deck__art" src="assets/laminas/02-cuadro.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/02-vesica-piscis.jpg" alt="Vésica Piscis: ilustración digital de línea fina sobre geometría sagrada." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Agenda digital</p>
+          <h3 class="item__title">Mi Tiempo es Sagrado</h3>
+          <p class="item__desc">Agenda ilustrada: el calendario como construcción geométrica. Espacio reservado para la portada y las páginas interiores.</p>
+          <span class="tag">Próximamente</span>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:0.8">
+            <div class="deck__slide is-current" data-ar="0.8">
+              <img class="deck__art" src="assets/laminas/editorial-agenda.svg" alt="Portada de la agenda Mi Tiempo es Sagrado: estudio geométrico.">
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="pirograbado">
+    <div class="wrap">
+      <h2 class="sr">Pirograbado</h2>
+      <div class="sec__head">
+        <p class="mono">04 — Pirograbado</p>
+        <p class="mono">Madera</p>
+      </div>
+
+      <article class="item">
+        <div class="item__side">
+          <p class="mono item__meta">Pirógrafo sobre madera</p>
+          <h3 class="item__title">Hexagrama</h3>
+          <p class="item__desc">La línea se quema en lugar de dibujarse: cada trazo es definitivo y el borde queda tostado.</p>
+        </div>
+        <div class="item__media">
+          <div class="deck zoom" data-deck style="--ar:1">
+            <div class="deck__slide is-current" data-ar="1">
+              <img class="deck__art" src="assets/laminas/03-pirograbado.svg" alt="" aria-hidden="true">
+              <img class="deck__art frame__art" src="assets/laminas/03-pirograbado.jpg" alt="Pirograbado: hexagrama quemado sobre madera." loading="lazy">
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -326,51 +470,10 @@ a{color:inherit}
     </div>
   </section>
 
-  <!-- ── Textil ──────────────────────────────────────────────────── -->
-  <section class="sec sec--textil" id="textil">
-    <div class="wrap">
-      <div class="sec__head">
-        <p class="mono">02 — Serie textil</p>
-        <p class="mono">Prototipos</p>
-      </div>
-
-      <div class="textil__top">
-        <h2 class="h2">Básicos ilustrados</h2>
-        <p class="lede">Primera serie de indumentaria: piezas básicas semi casuales con ilustración digital aplicada. La geometría cambia de escala y se vuelve estampa.</p>
-      </div>
-
-      <div class="flats">
-        <figure class="flat reveal">
-          <div class="frame">
-            <img src="assets/laminas/prenda-remera.svg" alt="" aria-hidden="true">
-            <img class="frame__art" src="assets/laminas/prenda-remera.jpg" alt="Remera oversize con ilustración geométrica en el pecho." loading="lazy">
-          </div>
-          <figcaption class="mono"><span>Remera oversize</span><span>01</span></figcaption>
-        </figure>
-        <figure class="flat reveal">
-          <div class="frame">
-            <img src="assets/laminas/prenda-buzo.svg" alt="" aria-hidden="true">
-            <img class="frame__art" src="assets/laminas/prenda-buzo.jpg" alt="Buzo con capucha y motivo geométrico en el pecho." loading="lazy">
-          </div>
-          <figcaption class="mono"><span>Buzo con capucha</span><span>02</span></figcaption>
-        </figure>
-        <figure class="flat reveal">
-          <div class="frame">
-            <img src="assets/laminas/prenda-camisa.svg" alt="" aria-hidden="true">
-            <img class="frame__art" src="assets/laminas/prenda-camisa.jpg" alt="Camisa con ilustración de línea fina en el pecho." loading="lazy">
-          </div>
-          <figcaption class="mono"><span>Camisa</span><span>03</span></figcaption>
-        </figure>
-      </div>
-
-      <p class="mono textil__note">Serie en desarrollo · moldes y estampas en ajuste</p>
-    </div>
-  </section>
-
   <!-- ── Sobre ───────────────────────────────────────────────────── -->
   <section class="sec" id="sobre">
     <div class="wrap sobre__grid">
-      <div class="sobre__aside"><p class="mono">03 — Sobre</p></div>
+      <div class="sobre__aside"><p class="mono">05 — Sobre</p></div>
       <div class="sobre__body">
         <h2 class="h2">Dos ideas fijas: la proporción y la hoja.</h2>
         <p>Trabajo sobre papel con compás, regla y tinta. La geometría sagrada me da el orden: círculos que se cruzan, ejes que dividen, tramas que crecen desde un centro. El naturalismo me devuelve el desorden: una nervadura, una semilla, una hoja que no cierra perfecta.</p>
@@ -397,7 +500,7 @@ a{color:inherit}
   <section class="sec" id="encargos">
     <div class="wrap">
       <div class="sec__head">
-        <p class="mono">04 — Encargos</p>
+        <p class="mono">06 — Encargos</p>
         <p class="mono">Boceto previo</p>
       </div>
       <div class="enc__grid">
@@ -417,13 +520,15 @@ a{color:inherit}
   <!-- ── Contacto ────────────────────────────────────────────────── -->
   <section class="sec--contacto" id="contacto">
     <div class="wrap">
-      <p class="mono">05 — Contacto</p>
-      <h2 class="ct__big">Escribime.</h2>
-      <a class="ct__mail" href="mailto:hola@maca.com">hola@maca.com</a>
-      <p class="ct__note">Contame el soporte, la medida y para cuándo lo necesitás.</p>
+      <p class="mono">07 — Contacto</p>
+      <h2 class="ct__big">Escríbeme.</h2>
+      <a class="ct__mail" href="mailto:maca.grafvar@gmail.com">maca.grafvar@gmail.com</a>
+      <p class="ct__note">Cuéntame el soporte, la medida y para cuándo lo necesitas.</p>
       <ul class="ct__links mono">
-        <li><a href="https://www.instagram.com/">Instagram</a></li>
-        <li><a href="#obra">Ver la obra</a></li>
+        <li><a href="https://wa.me/584141415997" target="_blank" rel="noopener">WhatsApp +58 414 141 5997</a></li>
+        <li><a href="https://www.instagram.com/maca.graf" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@macagraf" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="#murales">Ver la obra</a></li>
       </ul>
     </div>
   </section>
@@ -450,6 +555,84 @@ document.querySelectorAll('.frame__art').forEach(function (img) {
   if (img.complete) { img.naturalWidth > 0 ? ok() : drop(); }
 });
 
+/* Carrusel: se apilan las fotos (y el video) y se pasan con los botones de abajo. */
+document.querySelectorAll('[data-deck]').forEach(function (deck) {
+  var slides = [].slice.call(deck.querySelectorAll('.deck__slide'));
+  var nav = deck.parentElement.querySelector('.deck__nav');
+  var btns = nav ? [].slice.call(nav.querySelectorAll('.deck__btn')) : [];
+  var videos = [].slice.call(deck.querySelectorAll('video'));
+  var cur = 0;
+
+  /* El video sólo corre cuando es la slide visible y está a la vista. */
+  function onScreen() {
+    var r = deck.getBoundingClientRect();
+    return r.bottom > 100 && r.top < innerHeight - 100;
+  }
+  function syncVideo() {
+    videos.forEach(function (v) {
+      var show = v.closest('.deck__slide') === slides[cur] && onScreen();
+      if (show) {
+        if (v.paused) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      } else if (!v.paused) {
+        v.pause();
+      }
+    });
+  }
+
+  function fit() {
+    var ref = slides[cur].querySelector('.deck__art') || deck.querySelector('.deck__art');
+    var pad = ref ? parseFloat(getComputedStyle(ref).top) || 0 : 0;
+    var ar = parseFloat(slides[cur].getAttribute('data-ar')) || 1.333;
+    var w = deck.clientWidth - pad * 2;
+    var h = w / ar + pad * 2 + 2;
+    /* Los verticales muy altos (video) se limitan al alto de la ventana;
+       la imagen se ajusta sin recortarse, dejando aire a los lados. */
+    if (slides[cur].getAttribute('data-fit') === 'contain') {
+      h = Math.min(h, Math.round(Math.min(innerHeight * 0.84, 900)));
+    }
+    deck.style.height = h + 'px';
+  }
+  function go(i) {
+    cur = i;
+    deck.style.setProperty('--ar', slides[i].getAttribute('data-ar'));
+    slides.forEach(function (s, k) { s.classList.toggle('is-current', k === i); });
+    btns.forEach(function (b, k) {
+      b.classList.toggle('is-on', k === i);
+      b.setAttribute('aria-pressed', k === i ? 'true' : 'false');
+    });
+    fit();
+    syncVideo();
+  }
+  btns.forEach(function (b, k) { b.addEventListener('click', function () { go(k); }); });
+  fit();
+  syncVideo();
+  addEventListener('resize', fit);
+  addEventListener('load', fit);
+  addEventListener('scroll', syncVideo, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+});
+
+/* Zoom de detalle: al pasar el cursor la foto amplía 1,5× y el punto
+   que está debajo del puntero se queda quieto. */
+if (window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  document.querySelectorAll('.zoom').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width * 100;
+      var y = (e.clientY - r.top) / r.height * 100;
+      el.style.setProperty('--ox', Math.max(16, Math.min(84, x)).toFixed(1) + '%');
+      el.style.setProperty('--oy', Math.max(16, Math.min(84, y)).toFixed(1) + '%');
+    });
+    el.addEventListener('pointerleave', function () {
+      el.style.setProperty('--ox', '50%');
+      el.style.setProperty('--oy', '50%');
+    });
+  });
+}
+
 /* Arte de portada: cuando el toroide existe, reemplaza al estudio de compás. */
 var heroGeom = document.querySelector('.hero__geom');
 var heroArt = document.querySelector('.hero__art');
@@ -458,6 +641,22 @@ if (heroGeom && heroArt) {
   heroArt.addEventListener('load', heroOk);
   if (heroArt.complete && heroArt.naturalWidth > 0) heroOk();
 }
+
+/* Firma: debajo de «Contacto» del menú, centrada con esa palabra. */
+var sign = document.querySelector('.hero__sign');
+var navContacto = document.querySelector('.nav a[href="#contacto"]');
+var masthead = document.querySelector('.masthead');
+var heroEl = document.querySelector('.hero');
+function placeSign() {
+  if (!sign || !navContacto || !masthead || !heroEl) return;
+  var r = navContacto.getBoundingClientRect();
+  var h = heroEl.getBoundingClientRect();
+  sign.style.setProperty('--sign-x', (r.left + r.width / 2 - h.left) + 'px');
+  sign.style.setProperty('--sign-top', (masthead.getBoundingClientRect().height + 14) + 'px');
+}
+placeSign();
+addEventListener('resize', placeSign);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeSign);
 
 /* Barra de avance de lectura. */
 var prog = document.getElementById('prog');
@@ -470,22 +669,6 @@ function tick() {
 tick();
 addEventListener('scroll', tick, { passive: true });
 addEventListener('resize', tick);
-
-/* Aparición al desplazar. */
-var reveal = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window) {
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  reveal.forEach(function (el, i) {
-    el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
-    io.observe(el);
-  });
-} else {
-  reveal.forEach(function (el) { el.classList.add('is-in'); });
-}
 </script>
 </body>
 </html>

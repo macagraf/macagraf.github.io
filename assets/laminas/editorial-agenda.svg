@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1750" preserveAspectRatio="xMidYMid slice">
+<rect width="1400" height="1750" fill="#232529"/>
+<rect x="250" y="175" width="900" height="1400" fill="rgba(239,233,225,0.02)" stroke="rgba(239,233,225,0.28)" stroke-width="2.5"/>
+<g stroke="rgba(239,233,225,0.08)" stroke-width="1.5"><line x1="250" y1="700" x2="1150" y2="700"/><line x1="700" y1="175" x2="700" y2="1575"/></g>
+<g fill="none" stroke="rgba(239,233,225,0.1)" stroke-width="2.5">
+<circle cx="700" cy="700" r="300"/>
+</g>
+<g fill="none" stroke="rgba(210,105,30,0.55)" stroke-width="2.5" stroke-dasharray="1 14" stroke-linecap="round">
+<circle cx="700" cy="700" r="238"/>
+</g>
+<circle cx="700" cy="700" r="5" fill="rgba(210,105,30,0.75)" stroke="none"/>
+<g stroke="rgba(239,233,225,0.18)" stroke-width="2.5" stroke-linecap="round">
+<line x1="430" y1="1190" x2="970" y2="1190"/>
+<line x1="430" y1="1250" x2="790" y2="1250"/>
+<line x1="430" y1="1310" x2="620" y2="1310"/>
+</g>
+</svg>
